@@ -12,29 +12,35 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
+    <header class="header">
+      <div class="container header-container">
+        <a href="https://pixabay.com/" target="_blank">
+          <img
+            class="logo"
+            src="./images/pixabay_logo.png"
+            alt="pixabay logo"
+          />
+        </a>
+        <form class="search-form" id="search-form">
+          <input
+            type="text"
+            name="searchQuery"
+            autocomplete="off"
+            placeholder="Search images..."
+          />
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+        <label class="switch">
+          Infinite loading
+          <input class="js-checkbox" type="checkbox" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </header>
     <main>
-      <header class="header">
-        <div class="container header__container">
-          <a href="https://pixabay.com/" target="_blank">
-            <img
-              class="logo"
-              src="./images/pixabay_logo.png"
-              alt="pixabay logo"
-            />
-          </a>
-          <form class="search-form" id="search-form">
-            <input
-              type="text"
-              name="searchQuery"
-              autocomplete="off"
-              placeholder="Search images..."
-            />
-            <button type="submit"><i class="fa fa-search"></i></button>
-          </form>
-        </div>
-      </header>
-
-      <div class="container"></div>
+      <div class="container gallery-container">
+        <p class="images-info">Page: 22/444. Total images: 777</p>
+      </div>
       <div class="container"></div>
     </main>
     <script src="./index.js" type="module"></script>
