@@ -13,7 +13,7 @@ const params = new URLSearchParams({
  * @param {String} query - userInput
  * @param {Number} page - requested page
  * @param {Number} perPage - number of requested objects
- * @returns promise in valid json format or error
+ * @returns array of objects or error message
  */
 export default async function fetchPixabay(query, page, perPage) {
   try {
