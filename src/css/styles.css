@@ -46,7 +46,18 @@ p {
 }
 
 .logo {
-  width: 100px;
+  width: 150px;
+}
+
+.images-info-wrapper {
+  /* text-align: right; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.images-info {
+  display: inline-block;
+  margin-right: 20px;
 }
 
 /* form */
@@ -161,10 +172,6 @@ input:checked + .slider:before {
 
 /* ===== gallery ===== */
 
-.gallery-container {
+/* .gallery-container {
   padding-top: 0;
-}
-
-.images-info {
-  text-align: right;
-}
+} */
