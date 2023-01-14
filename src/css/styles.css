@@ -70,6 +70,11 @@ p {
   border-radius: 5px 0 0 5px;
 }
 
+.search-form input:focus,
+.search-form input:focus ~ button {
+  outline: 1px solid #0b7dda;
+}
+
 .search-form button {
   width: 10%;
   color: white;
