@@ -1,26 +1,35 @@
 import './js/intersection-observer';
 // import { setInfinityLoad } from './js/intersection-observer';
 
-import getImagePerPage from './js/set-search-options';
+// import getImagePerPage from './js/set-search-options';
 import createMarkup from './js/create-markup';
+import { cleanMarkup } from './js/markup-gallery';
 
 const searchForm = document.querySelector('#search-form');
 searchForm.addEventListener('submit', onFormSubmit);
 
-let userInput = '';
-let page = 1;
+// let userInput = '';
+// let page = 1;
 // let pages = 1;
-let perPage = 24;
-// let isInfinityLoad = false;
+// let perPage = 24;
+
+// export { userInput, page, pages, perPage };
+// export { userInput };
 
 async function onFormSubmit(event) {
   event.preventDefault();
-  perPage = getImagePerPage();
+  // perPage = getImagePerPage();
   // isInfinityLoad = setInfinityLoad();
-  // setInfinityLoad();
 
-  userInput = event.currentTarget.elements.searchQuery.value.trim();
+  const userInput = event.currentTarget.elements.searchQuery.value.trim();
+  // const newUserInput = event.currentTarget.elements.searchQuery.value.trim();
+  // if (userInput !== newUserInput) {
+  //   userInput = newUserInput;
+  //   // pages = 1;
+  //   // page = 1;
+  //   cleanMarkup();
+  // }
 
-  await createMarkup(userInput, page, perPage);
-  page += 1;
+  await createMarkup(userInput);
+  // page += 1;
 }
