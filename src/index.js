@@ -1,26 +1,21 @@
-import fetchPixabay from './js/fetch-pixabay';
+import { getImagePerPage, setInfinityLoad } from './js/set-search-options';
+import createMarkup from './js/create-markup';
 
 const searchForm = document.querySelector('#search-form');
 searchForm.addEventListener('submit', onFormSubmit);
 
 let userInput = '';
 let page = 1;
-let pages = 1;
-const perPage = 23;
+// let pages = 1;
+let perPage = 24;
+let isInfinityLoad = false;
 
 async function onFormSubmit(event) {
   event.preventDefault();
+  perPage = getImagePerPage();
+  isInfinityLoad = setInfinityLoad();
   userInput = event.currentTarget.elements.searchQuery.value.trim();
-  console.log('userInput :>> ', userInput);
 
-  getData();
-}
-
-async function getData() {
-  try {
-    const resp = await fetchPixabay(userInput, page, perPage);
-    console.log('resp :>> ', resp);
-  } catch {
-    console.log('error :>> ', error);
-  }
+  await createMarkup(userInput, page, perPage);
+  page += 1;
 }
