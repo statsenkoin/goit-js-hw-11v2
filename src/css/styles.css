@@ -26,6 +26,8 @@ p {
 } */
 
 .header {
+  position: fixed;
+  width: 100%;
   background-color: aqua;
 }
 
@@ -172,6 +174,19 @@ input:checked + .slider:before {
 
 /* ===== gallery ===== */
 
-/* .gallery-container {
-  padding-top: 0;
-} */
+.gallery-container {
+  padding-top: 100;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.photo-card img {
+  width: 280px;
+  height: 160px;
+  object-fit: cover;
+}
