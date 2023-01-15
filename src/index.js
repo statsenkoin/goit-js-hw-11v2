@@ -2,7 +2,7 @@ import './js/intersection-observer';
 // import { setInfinityLoad } from './js/intersection-observer';
 
 // import getImagePerPage from './js/set-search-options';
-import createMarkup from './js/create-markup';
+import updatePage from './js/update-page';
 import { cleanMarkup } from './js/markup-gallery';
 
 const searchForm = document.querySelector('#search-form');
@@ -30,6 +30,6 @@ async function onFormSubmit(event) {
   //   cleanMarkup();
   // }
 
-  await createMarkup(userInput);
+  await updatePage(userInput);
   // page += 1;
 }

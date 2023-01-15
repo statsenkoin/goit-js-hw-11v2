@@ -13,13 +13,13 @@ let userInput = '';
 
 export { page, pages, userInput };
 
-export default async function createMarkup(input) {
+export default async function updatePage(input) {
   if (userInput !== input) {
     userInput = input;
     page = 0;
     cleanMarkup();
   }
-  perPage = getImagePerPage();
+  updatePerPage();
   try {
     page += 1;
     const data = await fetchPixabay(userInput, page, perPage);
@@ -30,5 +30,13 @@ export default async function createMarkup(input) {
     markupGallery(hits);
   } catch {
     console.log('error :>> ', error);
+  }
+}
+
+function updatePerPage() {
+  const newPerPage = getImagePerPage();
+  if (perPage === 0) perPage = newPerPage;
+  if (newPerPage !== perPage) {
+    perPage = newPerPage;
   }
 }
