@@ -1,6 +1,10 @@
 const gallery = document.querySelector('.js-gallery');
 
-export default function markupGallery(data) {
+export function cleanMarkup() {
+  gallery.innerHTML = '';
+}
+
+export function markupGallery(data) {
   let markup = data.reduce(
     (
       acc,
