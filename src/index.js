@@ -48,6 +48,7 @@ async function onFormSubmit(event) {
 // ===== resetMarkup =====
 
 async function updateMarkup() {
+  toggleSearchButton();
   try {
     const data = await fetchPixabay(userInput, page, perPage);
     const { hits, total } = data;
@@ -61,9 +62,10 @@ async function updateMarkup() {
     updateImgInfo(page, pages, total);
     showMessage(data, page, pages);
     markupGallery(hits, gallery);
+    toggleSearchButton();
 
-    if (pages > page) {
-      gallery.append(buttonCardPlus);
+    if (pages > page && !paginationCheckbox.checked) {
+      // gallery.append(buttonCardPlus);
       buttonCardPlus.hidden = false;
     } else {
       buttonCardPlus.hidden = true;
@@ -96,6 +98,18 @@ function updatePerPageValue() {
     page = Math.floor((perPage * (page - 1)) / newPerPage) + 1;
   }
   perPage = newPerPage;
+}
+
+function toggleSearchButton() {
+  const spinner1 = `<i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>`;
+  const spinner2 = `<i class="fa fa-spinner fa-pulse fa-2x" aria-hidden="true"></i>`;
+  const search = `<i class="fa fa-search"></i>`;
+  const loadMore = `Load more...`;
+
+  searchForm.searchButton.innerHTML =
+    searchForm.searchButton.innerHTML === spinner1 ? search : spinner1;
+  buttonCardPlus.innerHTML =
+    buttonCardPlus.innerHTML === spinner2 ? loadMore : spinner2;
 }
 
 // ===== observer =====

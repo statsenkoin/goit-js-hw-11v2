@@ -194,11 +194,15 @@ input:checked + .slider:before {
   border-radius: 6px;
 }
 
+.card-plus {
+  text-align: center;
+}
+
 .card-image-load {
   width: 400px;
   height: 40px;
+  margin-top: 10px;
   background-color: #ccc;
-
   border-radius: 6px;
   opacity: 0.3;
 }
