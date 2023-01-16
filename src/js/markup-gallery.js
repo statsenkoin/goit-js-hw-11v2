@@ -1,11 +1,5 @@
-const gallery = document.querySelector('.js-gallery');
-
-export function cleanMarkup() {
-  gallery.innerHTML = '';
-}
-
-export function markupGallery(data) {
-  let markup = data.reduce(
+export default function markupGallery(hits, gallery) {
+  let markup = hits.reduce(
     (
       acc,
       { webformatURL, largeImageURL, tags, likes, views, comments, downloads }
