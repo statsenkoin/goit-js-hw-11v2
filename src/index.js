@@ -3,6 +3,7 @@ import updateImgInfo from './js/update-img-info';
 import markupGallery from './js/markup-gallery';
 import showMessage from './js/notify-message';
 import scrollGallery from './js/scroll_gallery';
+import { simpleLightbox } from './js/simple_lightbox';
 import './js/scrollup-button';
 
 let userInput = '';
@@ -60,6 +61,8 @@ async function updatePage() {
     buttonCardPlus.hidden = false;
 
     if (page > 1 && !paginationCheckbox.checked) scrollGallery(gallery);
+
+    simpleLightbox.refresh();
 
     page += 1;
   } catch (error) {
