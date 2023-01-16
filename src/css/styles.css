@@ -185,8 +185,36 @@ input:checked + .slider:before {
   justify-content: center;
 }
 
-.photo-card img {
+.photo-card img,
+.photo-card button {
   width: 280px;
   height: 160px;
   object-fit: cover;
+
+  border-radius: 6px;
+}
+
+.photo-card button {
+  background-color: #ccc;
+  opacity: 0.3;
+}
+
+/* scroll up button */
+
+.js-scrollup-button {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #0000;
+  color: #2196f3bb;
+  cursor: pointer;
+}
+
+.js-scrollup-button:hover {
+  color: #0b7dda;
+  scale: 1.1;
 }

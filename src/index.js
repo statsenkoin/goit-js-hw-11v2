@@ -2,6 +2,8 @@ import fetchPixabay from './js/fetch-pixabay';
 import updateImgInfo from './js/update-img-info';
 import markupGallery from './js/markup-gallery';
 import showMessage from './js/notify-message';
+import scrollGallery from './js/scroll_gallery';
+import './js/scrollup-button';
 
 let userInput = '';
 let page = 1;
@@ -18,10 +20,12 @@ const gallery = document.querySelector('.js-gallery');
 const paginationCheckbox = document.querySelector('.js-checkbox-pagination');
 const observerTarget = document.querySelector('.js-observer-target');
 const perPageSelector = document.querySelector('.js-per-page-selector');
+const buttonCardPlus = document.querySelector('.js-card-plus');
 
 searchForm.addEventListener('submit', onFormSubmit);
 paginationCheckbox.addEventListener('change', setInfinityLoad);
 perPageSelector.addEventListener('change', getPerPageValue);
+buttonCardPlus.addEventListener('click', updatePage);
 
 const observer = new IntersectionObserver(handleIntersect, observerOptions);
 
@@ -51,6 +55,12 @@ async function updatePage() {
     updateImgInfo(page, pages, total);
     showMessage(data, page, pages);
     markupGallery(hits, gallery);
+
+    gallery.append(buttonCardPlus);
+    buttonCardPlus.hidden = false;
+
+    if (page > 1 && !paginationCheckbox.checked) scrollGallery(gallery);
+
     page += 1;
   } catch (error) {
     console.log('error :>> ', error);
