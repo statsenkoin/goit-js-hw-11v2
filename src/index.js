@@ -25,8 +25,8 @@ const buttonCardPlus = document.querySelector('.js-card-plus');
 
 searchForm.addEventListener('submit', onFormSubmit);
 paginationCheckbox.addEventListener('change', setInfinityLoad);
-perPageSelector.addEventListener('change', getPerPageValue);
-buttonCardPlus.addEventListener('click', updatePage);
+// perPageSelector.addEventListener('change', getPerPageValue);
+buttonCardPlus.addEventListener('click', updateMarkup);
 
 const observer = new IntersectionObserver(handleIntersect, observerOptions);
 
@@ -35,30 +35,39 @@ async function onFormSubmit(event) {
   const newUserInput = event.currentTarget.elements.searchQuery.value.trim();
   if (userInput !== newUserInput) {
     userInput = newUserInput;
-    resetPage();
+    resetMarkup();
     observer.unobserve(observerTarget);
   }
   if (userInput && pages >= page) {
     paginationCheckbox.checked
       ? observer.observe(observerTarget)
-      : await updatePage();
+      : await updateMarkup();
   }
 }
 
-// ===== resetPage =====
+// ===== resetMarkup =====
 
-async function updatePage() {
+async function updateMarkup() {
+  page = updatePageValue();
+  perPage = updatePerPageValue();
+
   try {
     const data = await fetchPixabay(userInput, page, perPage);
     const { hits, total } = data;
+
+    perPage = getPerPageValue();
     pages = Math.ceil(total / perPage);
 
     updateImgInfo(page, pages, total);
     showMessage(data, page, pages);
     markupGallery(hits, gallery);
 
-    gallery.append(buttonCardPlus);
-    buttonCardPlus.hidden = false;
+    if (pages > page) {
+      gallery.append(buttonCardPlus);
+      buttonCardPlus.hidden = false;
+    } else {
+      buttonCardPlus.hidden = true;
+    }
 
     if (page > 1 && !paginationCheckbox.checked) scrollGallery(gallery);
 
@@ -70,7 +79,7 @@ async function updatePage() {
   }
 }
 
-function resetPage() {
+function resetMarkup() {
   page = 1;
   pages = 1;
   perPage = getPerPageValue();
@@ -79,6 +88,26 @@ function resetPage() {
 
 function getPerPageValue() {
   return perPageSelector.value;
+}
+
+function updatePerPageValue() {
+  const newPerPage = getPerPageValue();
+  return page === 1 ? newPerPage - 1 : newPerPage;
+}
+
+function updatePageValue() {
+  const newPerPage = getPerPageValue();
+
+  console.log('perPage :>> ', perPage);
+  console.log('newPerPage :>> ', newPerPage);
+  console.log('page in :>> ', page);
+
+  if (perPage !== newPerPage) {
+    page = Math.floor((perPage * page) / newPerPage) + 1;
+  }
+  console.log('page out :>> ', page);
+
+  return page;
 }
 
 // ===== observer =====
@@ -91,7 +120,7 @@ function setInfinityLoad() {
 
 function handleIntersect(entries, observer) {
   entries.forEach(async entry => {
-    if (entry.isIntersecting && userInput) await updatePage();
+    if (entry.isIntersecting && userInput) await updateMarkup();
     if (pages < page) observer.unobserve(observerTarget);
   });
 }
