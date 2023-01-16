@@ -7,27 +7,23 @@ let userInput = '';
 let page = 1;
 let pages = 1;
 let perPage = 24;
-// ================================
 const observerOptions = {
   root: null,
   rootMargin: '500px',
   threshold: 1.0,
 };
-// ================================
 
 const searchForm = document.querySelector('#search-form');
 const gallery = document.querySelector('.js-gallery');
-searchForm.addEventListener('submit', onFormSubmit);
-// ================================
 const paginationCheckbox = document.querySelector('.js-checkbox-pagination');
 const observerTarget = document.querySelector('.js-observer-target');
-
-paginationCheckbox.addEventListener('change', setInfinityLoad);
-const observer = new IntersectionObserver(handleIntersect, observerOptions);
-
 const perPageSelector = document.querySelector('.js-per-page-selector');
+
+searchForm.addEventListener('submit', onFormSubmit);
+paginationCheckbox.addEventListener('change', setInfinityLoad);
 perPageSelector.addEventListener('change', getPerPageValue);
-// ================================
+
+const observer = new IntersectionObserver(handleIntersect, observerOptions);
 
 async function onFormSubmit(event) {
   event.preventDefault();
@@ -43,6 +39,8 @@ async function onFormSubmit(event) {
       : await updatePage();
   }
 }
+
+// ===== resetPage =====
 
 async function updatePage() {
   try {
@@ -66,11 +64,11 @@ function resetPage() {
   gallery.innerHTML = '';
 }
 
-// ========================================================
-
 function getPerPageValue() {
   return perPageSelector.value;
 }
+
+// ===== observer =====
 
 function setInfinityLoad() {
   paginationCheckbox.checked
