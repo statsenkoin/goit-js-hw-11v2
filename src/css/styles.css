@@ -185,23 +185,27 @@ input:checked + .slider:before {
   justify-content: center;
 }
 
-.photo-card img,
-.photo-card button {
+/* .photo-card img,
+.photo-card button, */
+.card-image {
   width: 280px;
   height: 160px;
   object-fit: cover;
-
   border-radius: 6px;
 }
 
-.photo-card button {
+.card-image-load {
+  width: 400px;
+  height: 40px;
   background-color: #ccc;
+
+  border-radius: 6px;
   opacity: 0.3;
 }
 
 /* scroll up button */
 
-.js-scrollup-button {
+.scrollup-button {
   display: none;
   position: fixed;
   bottom: 20px;
@@ -214,7 +218,7 @@ input:checked + .slider:before {
   cursor: pointer;
 }
 
-.js-scrollup-button:hover {
+.scrollup-button:hover {
   color: #0b7dda;
   scale: 1.1;
 }

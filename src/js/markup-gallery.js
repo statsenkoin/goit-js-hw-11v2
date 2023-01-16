@@ -4,7 +4,7 @@ export default function markupGallery(hits, gallery) {
       acc,
       { webformatURL, largeImageURL, tags, likes, views, comments, downloads }
     ) => {
-      return (acc += `<div class="photo-card">
+      return (acc += `<div>
       <a href="${largeImageURL}">
         <img 
           class="card-image" 

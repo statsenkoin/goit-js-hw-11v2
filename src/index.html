@@ -55,19 +55,26 @@
       <div class="container gallery-container">
         <div class="js-gallery gallery">
           <!-- Картки зображень -->
-          <div class="photo-card js-card-plus" hidden="true">
-            <button type="button" class="card-image">
-              <!-- <i class="fa fa-search-plus fa-5x" aria-hidden="true"></i> -->
+          <!-- <div class="js-card-plus" hidden="true">
+            <button type="button" class="card-image card-image-load">
+              <i class="fa fa-search-plus fa-5x" aria-hidden="true"></i>
               <i class="fa fa-spinner fa-pulse fa-5x" aria-hidden="true"></i>
             </button>
-          </div>
+          </div> -->
+        </div>
+        <div class="js-card-plus" hidden="true">
+          <button type="button" class="card-image-load">Load more...</button>
         </div>
       </div>
       <div class="container"></div>
 
       <div class="js-observer-target"></div>
     </main>
-    <button type="button" class="js-scrollup-button" title="Go to top">
+    <button
+      type="button"
+      class="scrollup-button js-scrollup-button"
+      title="Go to top"
+    >
       <i class="fa fa-chevron-circle-up fa-4x"></i>
     </button>
     <script src="./index.js" type="module"></script>

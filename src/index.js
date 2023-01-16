@@ -25,7 +25,7 @@ const buttonCardPlus = document.querySelector('.js-card-plus');
 
 searchForm.addEventListener('submit', onFormSubmit);
 paginationCheckbox.addEventListener('change', setInfinityLoad);
-// perPageSelector.addEventListener('change', getPerPageValue);
+perPageSelector.addEventListener('change', updatePerPageValue);
 buttonCardPlus.addEventListener('click', updateMarkup);
 
 const observer = new IntersectionObserver(handleIntersect, observerOptions);
@@ -48,9 +48,6 @@ async function onFormSubmit(event) {
 // ===== resetMarkup =====
 
 async function updateMarkup() {
-  page = updatePageValue();
-  perPage = updatePerPageValue();
-
   try {
     const data = await fetchPixabay(userInput, page, perPage);
     const { hits, total } = data;
@@ -58,6 +55,9 @@ async function updateMarkup() {
     perPage = getPerPageValue();
     pages = Math.ceil(total / perPage);
 
+    if (page === 1) {
+      gallery.innerHTML = '';
+    }
     updateImgInfo(page, pages, total);
     showMessage(data, page, pages);
     markupGallery(hits, gallery);
@@ -91,23 +91,11 @@ function getPerPageValue() {
 }
 
 function updatePerPageValue() {
-  const newPerPage = getPerPageValue();
-  return page === 1 ? newPerPage - 1 : newPerPage;
-}
-
-function updatePageValue() {
-  const newPerPage = getPerPageValue();
-
-  console.log('perPage :>> ', perPage);
-  console.log('newPerPage :>> ', newPerPage);
-  console.log('page in :>> ', page);
-
+  const newPerPage = perPageSelector.value;
   if (perPage !== newPerPage) {
-    page = Math.floor((perPage * page) / newPerPage) + 1;
+    page = Math.floor((perPage * (page - 1)) / newPerPage) + 1;
   }
-  console.log('page out :>> ', page);
-
-  return page;
+  perPage = newPerPage;
 }
 
 // ===== observer =====
