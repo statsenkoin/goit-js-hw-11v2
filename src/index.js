@@ -7,9 +7,9 @@ import { simpleLightbox } from './js/simple_lightbox';
 import './js/scrollup-button';
 
 let userInput = '';
-let page = 1;
-let pages = 1;
-let perPage = 24;
+let page = 0;
+let pages = 0;
+let perPage = 0;
 const observerOptions = {
   root: null,
   rootMargin: '500px',
@@ -48,8 +48,8 @@ async function onFormSubmit(event) {
 // ===== resetMarkup =====
 
 async function updateMarkup() {
-  toggleSearchButton();
   try {
+    toggleSearchButton();
     const data = await fetchPixabay(userInput, page, perPage);
     const { hits, total } = data;
 
@@ -61,6 +61,7 @@ async function updateMarkup() {
     }
     updateImgInfo(page, pages, total);
     showMessage(data, page, pages);
+    buttonCardPlus.hidden = true;
     markupGallery(hits, gallery);
     toggleSearchButton();
 
@@ -118,6 +119,14 @@ function setInfinityLoad() {
   paginationCheckbox.checked
     ? observer.observe(observerTarget)
     : observer.unobserve(observerTarget);
+  if (
+    paginationCheckbox.checked ||
+    (!paginationCheckbox.checked && page === 0)
+  ) {
+    buttonCardPlus.hidden = true;
+  } else {
+    buttonCardPlus.hidden = false;
+  }
 }
 
 function handleIntersect(entries, observer) {
