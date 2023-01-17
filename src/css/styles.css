@@ -228,3 +228,42 @@ input:checked + .slider:before {
   color: #0b7dda;
   scale: 1.1;
 }
+
+/* pagination */
+.pagination {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.pagination-button {
+  width: 45px;
+  height: 25px;
+  border: 1px solid #0b7dda;
+  background-color: #f1f1f1;
+
+  transition: background-color 0.3s;
+}
+
+.pagination-button:hover:not(.pagination-button-current):not(
+    .pagination-button-more
+  ),
+.pagination-button:focus:not(.pagination-button-current):not(
+    .pagination-button-more
+  ) {
+  background-color: rgba(0, 255, 255, 0.2);
+}
+
+.pagination-button-current {
+  background-color: aqua;
+}
+
+.pagination-button:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.pagination-button:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}

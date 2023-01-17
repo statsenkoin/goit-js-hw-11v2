@@ -5,6 +5,7 @@ import showMessage from './js/notify-message';
 import scrollGallery from './js/scroll_gallery';
 import { simpleLightbox } from './js/simple_lightbox';
 import './js/scrollup-button';
+import { showPagination } from './js/custom-pagination';
 
 let userInput = '';
 let page = 0;
@@ -22,6 +23,7 @@ const paginationCheckbox = document.querySelector('.js-checkbox-pagination');
 const observerTarget = document.querySelector('.js-observer-target');
 const perPageSelector = document.querySelector('.js-per-page-selector');
 const buttonCardPlus = document.querySelector('.js-card-plus');
+const pagination = document.querySelector('.pagination');
 
 searchForm.addEventListener('submit', onFormSubmit);
 paginationCheckbox.addEventListener('change', setInfinityLoad);
@@ -50,6 +52,9 @@ async function onFormSubmit(event) {
 async function updateMarkup() {
   try {
     toggleSearchButton();
+    // =============================================================
+    pagination.innerHTML = '';
+    // =============================================================
     const data = await fetchPixabay(userInput, page, perPage);
     const { hits, total } = data;
 
@@ -62,8 +67,12 @@ async function updateMarkup() {
     updateImgInfo(page, pages, total);
     showMessage(data, page, pages);
     buttonCardPlus.hidden = true;
+
     markupGallery(hits, gallery);
     toggleSearchButton();
+    // =============================================================
+    showPagination(page, pages, pagination);
+    // =============================================================
 
     if (pages > page && !paginationCheckbox.checked) {
       // gallery.append(buttonCardPlus);
