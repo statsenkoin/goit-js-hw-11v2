@@ -106,6 +106,7 @@ function updatePerPageValue() {
     page = Math.floor((perPage * (page - 1)) / newPerPage) + 1;
   }
   perPage = newPerPage;
+  updateMarkup();
 }
 
 function toggleSearchButton() {
@@ -131,8 +132,10 @@ function setInfinityLoad() {
     (!paginationCheckbox.checked && page === 0)
   ) {
     buttonCardPlus.hidden = true;
+    pagination.hidden = true;
   } else {
     buttonCardPlus.hidden = false;
+    pagination.hidden = false;
   }
 }
 
