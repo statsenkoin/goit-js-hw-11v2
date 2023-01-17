@@ -16,6 +16,7 @@ const observerOptions = {
   rootMargin: '500px',
   threshold: 1.0,
 };
+let isPaginationButtonClick = false;
 
 const searchForm = document.querySelector('#search-form');
 const gallery = document.querySelector('.js-gallery');
@@ -29,6 +30,7 @@ searchForm.addEventListener('submit', onFormSubmit);
 paginationCheckbox.addEventListener('change', setInfinityLoad);
 perPageSelector.addEventListener('change', updatePerPageValue);
 buttonCardPlus.addEventListener('click', updateMarkup);
+pagination.addEventListener('click', onPaginationButtonClick);
 
 const observer = new IntersectionObserver(handleIntersect, observerOptions);
 
@@ -38,6 +40,7 @@ async function onFormSubmit(event) {
   if (userInput !== newUserInput) {
     userInput = newUserInput;
     resetMarkup();
+    pages = 1;
     observer.unobserve(observerTarget);
   }
   if (userInput && pages >= page) {
@@ -52,36 +55,32 @@ async function onFormSubmit(event) {
 async function updateMarkup() {
   try {
     toggleSearchButton();
-    // =============================================================
-    pagination.innerHTML = '';
-    // =============================================================
     const data = await fetchPixabay(userInput, page, perPage);
-    const { hits, total } = data;
+    const { hits, totalHits } = data;
 
     perPage = getPerPageValue();
-    pages = Math.ceil(total / perPage);
+    pages = Math.ceil(totalHits / perPage);
 
     if (page === 1) {
       gallery.innerHTML = '';
     }
-    updateImgInfo(page, pages, total);
+    updateImgInfo(page, pages, totalHits);
     showMessage(data, page, pages);
     buttonCardPlus.hidden = true;
 
     markupGallery(hits, gallery);
     toggleSearchButton();
-    // =============================================================
+    pagination.innerHTML = '';
     showPagination(page, pages, pagination);
-    // =============================================================
 
     if (pages > page && !paginationCheckbox.checked) {
-      // gallery.append(buttonCardPlus);
       buttonCardPlus.hidden = false;
     } else {
       buttonCardPlus.hidden = true;
     }
 
-    if (page > 1 && !paginationCheckbox.checked) scrollGallery(gallery);
+    if (page > 1 && !paginationCheckbox.checked && !isPaginationButtonClick)
+      scrollGallery(gallery);
 
     simpleLightbox.refresh();
 
@@ -93,7 +92,6 @@ async function updateMarkup() {
 
 function resetMarkup() {
   page = 1;
-  pages = 1;
   perPage = getPerPageValue();
   gallery.innerHTML = '';
 }
@@ -112,7 +110,7 @@ function updatePerPageValue() {
 
 function toggleSearchButton() {
   const spinner1 = `<i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>`;
-  const spinner2 = `<i class="fa fa-spinner fa-pulse fa-2x" aria-hidden="true"></i>`;
+  const spinner2 = `<i class="fa fa-spinner fa-pulse fa-x" aria-hidden="true"></i>`;
   const search = `<i class="fa fa-search"></i>`;
   const loadMore = `Load more...`;
 
@@ -143,4 +141,25 @@ function handleIntersect(entries, observer) {
     if (entry.isIntersecting && userInput) await updateMarkup();
     if (pages < page) observer.unobserve(observerTarget);
   });
+}
+
+// ===== pagination =====
+
+async function onPaginationButtonClick(event) {
+  const targetPage = event.target.textContent;
+  if (targetPage !== '...') {
+    isPaginationButtonClick = true;
+    pagination.innerHTML = '';
+    buttonCardPlus.hidden = true;
+    resetMarkup();
+
+    console.log('pages :>> ', pages);
+
+    if (!isNaN(Number(targetPage))) page = Number(targetPage);
+    if (targetPage === '>') page = pages;
+    if (targetPage === '<') page = 1;
+
+    await updateMarkup();
+    isPaginationButtonClick = false;
+  }
 }
