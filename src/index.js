@@ -156,8 +156,6 @@ async function onPaginationButtonClick(event) {
     buttonCardPlus.hidden = true;
     resetMarkup();
 
-    console.log('pages :>> ', pages);
-
     if (!isNaN(Number(targetPage))) page = Number(targetPage);
     if (targetPage === '>') page = pages;
     if (targetPage === '<') page = 1;
