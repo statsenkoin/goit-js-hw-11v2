@@ -6,6 +6,7 @@ import scrollGallery from './js/scroll_gallery';
 import { simpleLightbox } from './js/simple_lightbox';
 import './js/scrollup-button';
 import { showPagination } from './js/custom-pagination';
+import './js/modal';
 
 let userInput = '';
 let page = 0;
