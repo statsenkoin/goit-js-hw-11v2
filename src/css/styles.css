@@ -21,10 +21,6 @@ p {
   margin: 0;
 }
 
-/* img {
-  display: block;
-} */
-
 .header {
   position: fixed;
   width: 100%;
@@ -185,8 +181,6 @@ input:checked + .slider:before {
   justify-content: center;
 }
 
-/* .photo-card img,
-.photo-card button, */
 .card-image {
   width: 280px;
   height: 160px;
@@ -200,7 +194,6 @@ input:checked + .slider:before {
 
 .card-image-load {
   width: 280px;
-  /* height: 30px; */
   margin-top: 10px;
   padding: 6px;
   background-color: #ccc;
@@ -209,7 +202,7 @@ input:checked + .slider:before {
   opacity: 0.3;
 }
 
-/* scroll up button */
+/* ===== scroll up button ===== */
 
 .scrollup-button {
   display: none;
@@ -229,7 +222,8 @@ input:checked + .slider:before {
   scale: 1.1;
 }
 
-/* pagination */
+/* ===== pagination ===== */
+
 .pagination {
   margin-top: 10px;
   margin-bottom: 30px;
