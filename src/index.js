@@ -39,6 +39,8 @@ async function onFormSubmit(event) {
   const newUserInput = event.currentTarget.elements.searchQuery.value.trim();
   if (userInput !== newUserInput) {
     userInput = newUserInput;
+    pagination.innerHTML = '';
+    buttonCardPlus.hidden = true;
     resetMarkup();
     pages = 1;
     observer.unobserve(observerTarget);
@@ -61,12 +63,14 @@ async function updateMarkup() {
     perPage = getPerPageValue();
     pages = Math.ceil(totalHits / perPage);
 
-    if (page === 1) {
-      gallery.innerHTML = '';
-    }
     updateImgInfo(page, pages, totalHits);
     showMessage(data, page, pages);
     buttonCardPlus.hidden = true;
+    if (!data.hits.length) return;
+
+    if (page === 1) {
+      gallery.innerHTML = '';
+    }
 
     markupGallery(hits, gallery);
     toggleSearchButton();
