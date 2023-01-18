@@ -11,9 +11,10 @@ export default function markupGallery(hits, gallery) {
           src="${webformatURL}" 
           alt="${tags}" 
           loading="lazy"
+          title="Open slide show"
         />
       </a>
-      <div class="card-info">
+      <div class="card-info" title="Add to favourite">
         <p class="info-item">
           <i class="fa fa-regular fa-heart"></i>
           ${likes}
