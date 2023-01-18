@@ -153,7 +153,10 @@ function handleIntersect(entries, observer) {
 // ===== pagination =====
 
 async function onPaginationButtonClick(event) {
-  const targetPage = event.target.textContent;
+  if (event.target.nodeName !== 'BUTTON') return;
+  const targetPage = Number(event.target.textContent);
+  if (targetPage === page - 1) return;
+
   if (targetPage !== '...') {
     isPaginationButtonClick = true;
     pagination.innerHTML = '';

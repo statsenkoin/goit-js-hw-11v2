@@ -23,6 +23,7 @@ p {
 
 .header {
   position: fixed;
+  z-index: 5;
   width: 100%;
   background-color: aqua;
 }
@@ -181,11 +182,46 @@ input:checked + .slider:before {
   justify-content: center;
 }
 
+.card-wrapper {
+  position: relative;
+  transition: scale 0.4s;
+}
+
+.card-info {
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  top: 0;
+  left: 0;
+
+  padding: 5px;
+  background-color: #2196f3aa;
+  color: rgba(255, 255, 0, 0.7);
+
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+
 .card-image {
+  display: block;
   width: 280px;
   height: 160px;
   object-fit: cover;
   border-radius: 6px;
+}
+.card-wrapper:hover {
+  scale: 1.1;
+  z-index: 2;
+}
+.card-wrapper:hover > .card-info {
+  border-radius: 6px 6px 0 0;
+  cursor: pointer;
+  opacity: 1;
+}
+
+.card-wrapper:hover .card-image {
+  box-shadow: 2px 2px 10px 3px rgba(0, 0, 0, 0.3);
 }
 
 .card-plus {
@@ -200,6 +236,7 @@ input:checked + .slider:before {
   border-radius: 6px;
   font-size: 16px;
   opacity: 0.3;
+  cursor: pointer;
 }
 
 /* ===== scroll up button ===== */
@@ -212,7 +249,8 @@ input:checked + .slider:before {
   z-index: 99;
   border: none;
   outline: none;
-  background-color: #0000;
+  background: #0000;
+
   color: #2196f3bb;
   cursor: pointer;
 }
@@ -245,7 +283,8 @@ input:checked + .slider:before {
 .pagination-button:focus:not(.pagination-button-current):not(
     .pagination-button-more
   ) {
-  background-color: rgba(0, 255, 255, 0.2);
+  background-color: rgba(0, 255, 255, 0.4);
+  cursor: pointer;
 }
 
 .pagination-button-current {

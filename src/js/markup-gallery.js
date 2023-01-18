@@ -4,7 +4,7 @@ export default function markupGallery(hits, gallery) {
       acc,
       { webformatURL, largeImageURL, tags, likes, views, comments, downloads }
     ) => {
-      return (acc += `<div>
+      return (acc += `<div class="card-wrapper">
       <a href="${largeImageURL}">
         <img 
           class="card-image" 
@@ -13,6 +13,24 @@ export default function markupGallery(hits, gallery) {
           loading="lazy"
         />
       </a>
+      <div class="card-info">
+        <p class="info-item">
+          <i class="fa fa-regular fa-heart"></i>
+          ${likes}
+        </p>
+        <p class="info-item">
+          <i class="fa fa-regular fa-eye"></i>
+          ${views}
+        </p>
+        <p class="info-item">
+          <i class="fa fa-regular fa-comments"></i>
+          ${comments}
+        </p>
+        <p class="info-item">
+          <i class="fa fa-regular fa-download"></i>
+          ${downloads}
+        </p>
+      </div>
     </div>
     `);
     },
@@ -20,3 +38,4 @@ export default function markupGallery(hits, gallery) {
   );
   gallery.insertAdjacentHTML('beforeend', markup);
 }
+// <i class="fa-solid fa-heart"></i>
