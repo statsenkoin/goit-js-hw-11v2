@@ -2,10 +2,19 @@ export default function markupGallery(hits, gallery) {
   let markup = hits.reduce(
     (
       acc,
-      { webformatURL, largeImageURL, tags, likes, views, comments, downloads }
+      {
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+        id,
+      }
     ) => {
-      return (acc += `<div class="card-wrapper">
-      <a href="${largeImageURL}">
+      return (acc += `<div class="card-wrapper" id="${id}">
+      <a href="${largeImageURL}" class="card-link">
         <img 
           class="card-image" 
           src="${webformatURL}" 
@@ -39,4 +48,3 @@ export default function markupGallery(hits, gallery) {
   );
   gallery.insertAdjacentHTML('beforeend', markup);
 }
-// <i class="fa-solid fa-heart"></i>
