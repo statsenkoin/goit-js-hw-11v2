@@ -62,18 +62,44 @@ function onModalFavouriteCheck() {
   modalForm.submit.disabled = modalForm.favourite.checked ? false : true;
 }
 
+// const key = 'pixabay';
+// let storage = [{ imageId: '234567', commentText: 'dfghj' }];
+// let lsSer;
+// let ls;
+
 function onModalFormSubmit(event) {
   event.preventDefault();
   console.log('imageId :>> ', imageId);
   console.log('modalForm.comment.value :>> ', modalForm.comment.value);
+  // const commentText = modalForm.comment.value;
+  // const storageValue = {
+  //   imageId,
+  //   commentText,
+  // };
+  // storageSave(key, storageValue);
   onModalClose();
 }
+// function storageSave(key, value) {
+//   ls = localStorage.getItem(key);
+//   console.log('ls :>> ', ls);
+//   lsSer = JSON.parse(ls);
+//   console.log('lsSer :>> ', lsSer);
+
+//   storage.push(value);
+//   console.log('storage :>> ', storage);
+//   const serializedState = JSON.stringify(storage);
+//   localStorage.setItem(key, serializedState);
+//   console.log('====================================');
+// }
+// const aaa = JSON.parse(localStorage.getItem('pixabay'));
+// console.log(aaa);
+// console.log('aaa[0] :>> ', aaa[0]);
 
 function onModalClose() {
   modal.style.display = 'none';
   window.removeEventListener('keydown', onEscClose);
-  modalForm.removeEventListener('submit', onModalFormSubmit);
-  modalForm.favourite.removeEventListener('change', onModalFavouriteCheck);
+  // modalForm.removeEventListener('submit', onModalFormSubmit);
+  // modalForm.favourite.removeEventListener('change', onModalFavouriteCheck);
 }
 
 window.onclick = function (event) {
